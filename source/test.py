@@ -1,9 +1,7 @@
 def run_bojack_quiz():
     print("Welcome to my BoJack Horseman quiz!! :D")
 
-    playing = input("Would you like to participate? ")
-
-    if playing.lower() != "yes":
+    if not input("Would you like to participate? ").lower() in ['y', 'yes', 'ja']:
         quit()
 
     print("Great, let's begin! :)")
@@ -110,7 +108,7 @@ def run_bojack_quiz():
             "correct": "b"
         }
     ]
-
+    points = 0
     for question_data in questions:
         print(question_data["question"])
         answers = question_data["answers"]
@@ -120,11 +118,11 @@ def run_bojack_quiz():
             print(f"{key}) {value}")
 
         chances = 3
-
         while chances > 0:
-            answer = input("You have 3 chances! Good luck: ").lower()
+            answer = input(f"You have {chances} chances! Good luck: ").lower()
 
             if answer in answers and answers[answer] == answers[correct_answer]:
+                points += 1
                 print(f"Correct! '{answers[correct_answer]}' is the right answer.")
                 break
             else:
@@ -135,5 +133,7 @@ def run_bojack_quiz():
             print("You've used all your chances. Game over.")
 
     print("Congratulations! You've completed my first quiz!")
+    print(f"You got {points} out of 10 points")
+
 
 run_bojack_quiz()
